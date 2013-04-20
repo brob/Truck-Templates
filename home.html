@@ -37,7 +37,7 @@ function initialize() {
 	var all = [
 	{% if stops %}
 		{% for stop in stops %}
-			["<a href='{{ stop.truck.get_absolute_url }}'>{{ stop.truck.name }}</a>", "{{ stop.address }}", "{{ stop.city }}", "{{ stop.state }}", "{{ stop.zip }}", {{ stop.geo }}]{% if not forloop.last %}, {% endif %} 
+			["<a href='{{ stop.truck.get_absolute_url }}'>{{ stop.truck.name }}</a>", "{{ stop.full_address }}", {{ stop.geo }}, "{{ stop.truck.description }}"]{% if not forloop.last %}, {% endif %} 
 		{% endfor %}
 	{% else %}
 		["Trucks are sleeping!", "203 Beale Street", "Memphis", "TN", "38103", 35.139456, -90.051643]
@@ -62,21 +62,19 @@ function initialize() {
 		for (var i in all) {	
 			var name = all[i][0];
 			var address = all[i][1];
-			var city = all[i][2];
-			var state = all[i][3];
-			var zip = all[i][4];
-			var lat = all[i][5];
-			var lng = all[i][6];
+			var lat = all[i][2];
+			var lng = all[i][3];
+			var desc = all[i][4];
 			var latlngset;
 			
 			latlngset = new google.maps.LatLng(lat, lng);
 			bounds.extend(latlngset);
 			map.fitBounds(bounds);
 			var marker = new google.maps.Marker({
-				map: map, title: city, position: latlngset
+				map: map, title: name, position: latlngset
 			});
 			
-			var content = '<div class="map-content"><h3>' + name + '</h3>' + address + '<br />' + city + ', ' + state + ' ' + zip + '<br /><a href="http://maps.google.com/?daddr=' + address + ' ' + city + ', ' + state + ' ' + zip + '" target="_blank">Get Directions</a></div>';	
+			var content = '<div class="map-content"><h3>' + name + '</h3>' + desc + '<br />' + address +  '<br /><a href="http://maps.google.com/?daddr=' + address + '" target="_blank">Get Directions</a></div>';	
 			
 			var infowindow = new google.maps.InfoWindow();
 			
