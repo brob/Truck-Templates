@@ -37,7 +37,7 @@ function initialize() {
 	var all = [
 	{% if stops %}
 		{% for stop in stops %}
-			["<a href='{{ stop.truck.get_absolute_url }}'>{{ stop.truck.name }}</a>", "{{ stop.full_address }}", {{ stop.geo }}, "{{ stop.truck.description }}"]{% if not forloop.last %}, {% endif %} 
+			["<a href='{{ stop.truck.get_absolute_url }}'>{{ stop.truck.name|escape }}</a>", "{{ stop.full_address }}", {{ stop.geo }}, "{{ stop.truck.description|escape }}"]{% if not forloop.last %}, {% endif %} 
 		{% endfor %}
 	{% else %}
 		["Trucks are sleeping!", "203 Beale Street", "Memphis", "TN", "38103", 35.139456, -90.051643]
