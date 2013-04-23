@@ -40,7 +40,7 @@ function initialize() {
 			["<a href='{{ stop.truck.get_absolute_url }}'>{{ stop.truck.name|escapejs }}</a>", "{{ stop.full_address }}", {{ stop.geo }}, "{{ stop.truck.description|escapejs }}"]{% if not forloop.last %}, {% endif %} 
 		{% endfor %}
 	{% else %}
-		["Trucks are sleeping!", "203 Beale Street", "Memphis", "TN", "38103", 35.139456, -90.051643]
+		["Trucks are sleeping!", "203 Beale Street Memphis TN 38103", 35.139456, -90.051643]
 		
 	{% endif %} 
 	];
