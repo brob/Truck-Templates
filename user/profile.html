@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class ="row">
+<div class ="container">
+	
+
+	{% load account %}
+	{% load socialaccount %}
+	
+	<h1>Signed in as {% user_display user %}</h1>
+	{% get_social_accounts user as accounts %}
+
+	{% if accounts.facebook %}Logged into Facebook as {% for account in accounts.facebook %}
+		{{ account.extra_data.username }}{% if not forloop.last %}, {% endif %}
+	{% endfor %} {% endif %}
+
+</div><!-- end .container -->
+
+</div><!-- end .row -->
+
+
+{% endblock content %}
