@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class ="row">
+
+
+
+<h1>{{ truck }} {{ geo }}</h1>
+
+
+<form action="." method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	
+
+	<p><input type="submit" value="Spot it &raquo;"></p>
+</form>
+</div><!-- end .row -->
+
+
+{% endblock content %}

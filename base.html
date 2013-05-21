@@ -30,16 +30,27 @@
 	</head>
 	
 	<body>
+
+	
 	<div class ="row" id="navigation">
 		<div class ="container">
+			
+			
+			<div id ="utility_nav">
+				<ul>
+					{% if user.is_authenticated %}<li><a href="/accounts/profile/" title="Profile">Profile</a></li>
+					{% else %}<li><a href="/accounts/login/" title="Login">Login</a></li>{% endif %}
+				</ul>
+
+			</div><!-- end #utility_nav -->
+			
 			<div class ="span4" id="logo_wrapper">
 				<a href="/" title="Memphis Four Wheel Food" id="logo"></a>
 			</div><!-- end .span5 -->
-			<div class="span4" id="main_location">
-				<h3>Memphis</h3>
-			</div><!-- end .span5 -->
-			<div class ="span4">
+		
+			<div class ="span8">
 		 		<ul id="nav">
+					
 					<li><a href="/trucks/" title="Listing of all food trucks">Food Trucks</a></li>
 					<li><a href="/contact/" title="Contact Memphis Four Wheel Food">Contact</a></li>
 					
@@ -74,6 +85,12 @@
 {% endcomment %}	
 	<div class ="row">
 		<div class ="container">
+			<div class="checkin_container">
+				
+				<a href="/checkin/" id="checkin_nav" class="checkinButton" title="Checkin">Checkin</a>
+			
+			</div><!-- end .checkin_container -->
+			
 			{% block content %}{% endblock content %}
 		</div>
 	</div>
@@ -158,6 +175,34 @@
 		}
 
 		jTrucks.init();
+		
+		
+		function get_location() {
+		  navigator.geolocation.getCurrentPosition(add_geo, geo_error, {maximumAge:600000});
+		}
+		function geo_error() {
+			
+		}
+		$(".checkinButton").click(function(e) {
+			e.preventDefault();
+			get_location();
+			
+		})
+		function add_geo(geo) {
+			lat = geo.coords.latitude;
+			lng = geo.coords.longitude;
+			link = $(".checkinButton");
+			
+			$(link).attr('href', function() {
+			        url = this.href + "?" + '&lat=' + lat + "&lng=" + lng;
+					window.location = url;
+			    });
+		
+		}
+
+		//get_location();
+		
+		
 	</script>
 	
 	
