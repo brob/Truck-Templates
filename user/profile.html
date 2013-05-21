@@ -16,9 +16,30 @@
 		{{ account.extra_data.username }}{% if not forloop.last %}, {% endif %}
 	{% endfor %} {% endif %}
 
+	<br /><br />
+
+
+{% load checkins %}
+{% get_checkins 5 user as checkins %}
+
+{% if checkins %}
+	
+	<h3>Recent truck spots for {{ user }}</h3>
+	
+	{% for checkin in checkins %}
+		{{ checkin.truck }} at {{ checkin.full_address }}<br />
+	{% endfor %}
+
+
+
+{% endif %}
+
 </div><!-- end .container -->
 
 </div><!-- end .row -->
+
+
+
 
 
 {% endblock content %}
